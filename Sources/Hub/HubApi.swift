@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import os
 
 public struct HubApi {
     var downloadBase: URL
@@ -16,7 +15,7 @@ public struct HubApi {
 
     public typealias RepoType = Hub.RepoType
     public typealias Repo = Hub.Repo
-    
+
     public init(downloadBase: URL? = nil, hfToken: String? = nil, endpoint: String = "https://huggingface.co", useBackgroundSession: Bool = false) {
         self.hfToken = hfToken ?? Self.hfTokenFromEnv()
         if let downloadBase {
@@ -28,10 +27,8 @@ public struct HubApi {
         self.endpoint = endpoint
         self.useBackgroundSession = useBackgroundSession
     }
-    
+
     public static let shared = HubApi()
-    
-    private static let logger = Logger()
 }
 
 private extension HubApi {
