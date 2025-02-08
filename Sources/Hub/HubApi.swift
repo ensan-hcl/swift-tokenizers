@@ -153,9 +153,3 @@ public extension HubApi {
         return etag.trimmingPrefix("W/").trimmingCharacters(in: CharacterSet(charactersIn: "\""))
     }
 }
-
-public extension [String] {
-    func matching(glob: String) -> [String] {
-        filter { fnmatch(glob, $0, 0) == 0 }
-    }
-}
