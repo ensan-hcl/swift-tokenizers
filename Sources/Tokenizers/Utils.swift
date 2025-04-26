@@ -9,23 +9,6 @@
 import Foundation
 
 struct Utils {
-    /// Time a block in ms
-    static func time<T>(label: String, _ block: () -> T) -> T {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        let result = block()
-        let diff = (CFAbsoluteTimeGetCurrent() - startTime) * 1_000
-        print("[\(label)] \(diff)ms")
-        return result
-    }
-    
-    /// Time a block in seconds and return (output, time)
-    static func time<T>(_ block: () -> T) -> (T, Double) {
-        let startTime = CFAbsoluteTimeGetCurrent()
-        let result = block()
-        let diff = CFAbsoluteTimeGetCurrent() - startTime
-        return (result, diff)
-    }
-    
     /// Return unix timestamp in ms
     static func dateNow() -> Int64 {
         // Use `Int` when we don't support 32-bits devices/OSes anymore.

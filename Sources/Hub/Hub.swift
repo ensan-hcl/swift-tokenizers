@@ -113,15 +113,6 @@ public class LanguageModelConfigurationFromHub {
     private var configPromise: Task<Configurations, Error>? = nil
 
     public init(
-        modelName: String,
-        hubApi: HubApi = .shared
-    ) {
-        self.configPromise = Task.init {
-            return try await self.loadConfig(modelName: modelName, hubApi: hubApi)
-        }
-    }
-    
-    public init(
         modelFolder: URL,
         hubApi: HubApi = .shared
     ) {
@@ -173,17 +164,6 @@ public class LanguageModelConfigurationFromHub {
         }
     }
 
-    func loadConfig(
-        modelName: String,
-        hubApi: HubApi = .shared
-    ) async throws -> Configurations {
-        let filesToDownload = ["config.json", "tokenizer_config.json", "tokenizer.json"]
-        let repo = Hub.Repo(id: modelName)
-        let downloadedModelFolder = try await hubApi.snapshot(from: repo, matching: filesToDownload)
-
-        return try await loadConfig(modelFolder: downloadedModelFolder, hubApi: hubApi)
-    }
-    
     func loadConfig(
         modelFolder: URL,
         hubApi: HubApi = .shared

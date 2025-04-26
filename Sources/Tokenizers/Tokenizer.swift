@@ -575,17 +575,6 @@ extension AutoTokenizer {
     }
 
     public static func from(
-        pretrained model: String,
-        hubApi: HubApi = .shared
-    ) async throws -> Tokenizer {
-        let config = LanguageModelConfigurationFromHub(modelName: model, hubApi: hubApi)
-        guard let tokenizerConfig = try await config.tokenizerConfig else { throw TokenizerError.missingConfig }
-        let tokenizerData = try await config.tokenizerData
-
-        return try AutoTokenizer.from(tokenizerConfig: tokenizerConfig, tokenizerData: tokenizerData)
-    }
-
-    public static func from(
         modelFolder: URL,
         hubApi: HubApi = .shared
     ) async throws -> Tokenizer {
